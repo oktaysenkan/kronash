@@ -1,1 +1,6 @@
-export { default as default } from './lib/kronash';
+import Kronash from './lib/kronash';
+
+export * from './lib/kronash';
+export * from './lib/types';
+
+export default Kronash;

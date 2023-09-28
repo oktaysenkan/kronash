@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@kronash/core": ["packages/core/src/index.ts"]
+      "@kronash/core": ["packages/core/src/index.ts"],
+      "@kronash/react": ["packages/react/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
