@@ -1,7 +1,7 @@
 {
-  "name": "react-app",
+  "name": "react-demo",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/react-app/src",
+  "sourceRoot": "apps/react-demo/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/packages/react-app"
+        "outputPath": "dist/apps/react-demo"
       },
       "configurations": {
         "development": {
@@ -24,15 +24,15 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "react-app:build"
+        "buildTarget": "react-demo:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "react-app:build:development",
+          "buildTarget": "react-demo:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "react-app:build:production",
+          "buildTarget": "react-demo:build:production",
           "hmr": false
         }
       }
@@ -41,14 +41,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "react-app:build"
+        "buildTarget": "react-demo:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "react-app:build:development"
+          "buildTarget": "react-demo:build:development"
         },
         "production": {
-          "buildTarget": "react-app:build:production"
+          "buildTarget": "react-demo:build:production"
         }
       }
     },
@@ -57,14 +57,20 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/packages/react-app"
+        "reportsDirectory": "../../coverage/apps/react-demo"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/react-app/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/react-demo/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "react-demo:build"
       }
     }
   },

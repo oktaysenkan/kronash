@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
-  cacheDir: '../../node_modules/.vite/react-app',
+  cacheDir: '../../node_modules/.vite/react-demo',
 
   server: {
     port: 4200,

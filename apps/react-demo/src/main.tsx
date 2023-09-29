@@ -2,9 +2,9 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import Kronash from '@kronash/core';
-import { KronashProvider } from '@kronash/react';
 
 import App from './app/app';
+import { KronashProvider } from '@kronash/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

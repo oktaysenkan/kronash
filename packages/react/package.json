@@ -1,6 +1,11 @@
 {
   "name": "@kronash/react",
-  "version": "0.0.1",
-  "main": "src/index.js",
-  "types": "src/index.d.ts"
+  "version": "0.0.1-alpha.0",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }
