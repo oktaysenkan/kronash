@@ -23,52 +23,32 @@ type UseKronash = {
 
 const defaultClient = new Kronash();
 
-const convertToPlainObject = (kronash: Kronash | undefined): UseKronash => {
-  const client = kronash || defaultClient;
-
-  return {
-    tasks: client.tasks,
-    clear: (...args) => client.clear(...args),
-    clearAll: (...args) => client.clearAll(...args),
-    create: (...args) => client.create(...args),
-    getAll: (...args) => client.getAll(...args),
-    pause: (...args) => client.pause(...args),
-    pauseAll: (...args) => client.pauseAll(...args),
-    resume: (...args) => client.resume(...args),
-    resumeAll: (...args) => client.resumeAll(...args),
-    start: (...args) => client.start(...args),
-    startAll: (...args) => client.startAll(...args),
-    stop: (...args) => client.stop(...args),
-    stopAll: (...args) => client.stopAll(...args),
-    wait: (...args) => client.wait(...args),
-    getRemainingTime: (...args) => client.getRemainingTime(...args),
-  };
-};
-
 export const useKronash = (): UseKronash => {
   const context = React.useContext(KronashContext);
 
+  const client = context?.client || defaultClient;
+
   const [clientState, setClientState] = React.useState<UseKronash>(
-    convertToPlainObject(context.client)
+    client.toPlainObject()
   );
 
   if (context === undefined) {
     throw new Error('useKronash must be used within a KronashProvider');
   }
 
-  if (!context.client) {
+  if (!client) {
     throw new Error('KronashProvider is provided without a client');
   }
 
   useEffect(() => {
-    const unsubscribe = context.client.subscribe((newValue) => {
-      setClientState(convertToPlainObject(newValue));
+    const unsubscribe = client.subscribe((newValue) => {
+      setClientState(newValue.toPlainObject());
     });
 
     return () => {
       unsubscribe();
     };
-  }, [context.client]);
+  }, [client]);
 
   return clientState;
 };

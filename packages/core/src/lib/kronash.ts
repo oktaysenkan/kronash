@@ -1,18 +1,12 @@
 import DefaultTaskHandler from './handlers/default-task.handler';
-import { CreateTaskOptions, Task } from './types';
+import { CreateTaskOptions, KronashChain, KronashPlain, Task } from './types';
 
 class Kronash {
   #tasks: Record<string, Task> = {};
   private observers = new Set<(kronash: Kronash) => void>();
 
   constructor() {
-    //
-  }
-
-  get tasks() {
-    const tasksAsArray = Object.values({ ...this.#tasks });
-
-    return tasksAsArray;
+    // TODO: Add options for throw error or return
   }
 
   subscribe(observer: (kronash: Kronash) => void) {
@@ -31,6 +25,16 @@ class Kronash {
     this.observers.forEach((observer) => {
       observer(kronash);
     });
+  }
+
+  get tasks() {
+    const tasksAsArray = Object.values({ ...this.#tasks }).map((task) => {
+      const { handler, ...taskWithoutHandler } = task;
+
+      return taskWithoutHandler;
+    });
+
+    return tasksAsArray;
   }
 
   create(options: CreateTaskOptions) {
@@ -74,7 +78,7 @@ class Kronash {
 
     this.notify(this);
 
-    return this;
+    return this.chain(options.name);
   }
 
   async wait(duration: number) {
@@ -82,15 +86,13 @@ class Kronash {
   }
 
   start(name: string) {
-    if (!this.checkTaskExists(name)) {
-      return this;
-    }
+    this.checkTaskExists(name);
 
     this.#tasks[name].handler.start();
 
     this.notify(this);
 
-    return this;
+    return this.chain(name);
   }
 
   startAll() {
@@ -99,20 +101,16 @@ class Kronash {
       .forEach((task) => task.handler.start());
 
     this.notify(this);
-
-    return this;
   }
 
   pause(name: string) {
-    if (!this.checkTaskExists(name)) {
-      return this;
-    }
+    this.checkTaskExists(name);
 
     this.#tasks[name].handler.pause();
 
     this.notify(this);
 
-    return this;
+    return this.chain(name);
   }
 
   pauseAll() {
@@ -121,20 +119,16 @@ class Kronash {
       .forEach((task) => task.handler.pause());
 
     this.notify(this);
-
-    return this;
   }
 
   resume(name: string) {
-    if (!this.checkTaskExists(name)) {
-      return this;
-    }
+    this.checkTaskExists(name);
 
     this.#tasks[name].handler.resume();
 
     this.notify(this);
 
-    return this;
+    return this.chain(name);
   }
 
   resumeAll() {
@@ -143,20 +137,16 @@ class Kronash {
       .forEach((task) => task.handler.resume());
 
     this.notify(this);
-
-    return this;
   }
 
   stop(name: string) {
-    if (!this.checkTaskExists(name)) {
-      return this;
-    }
+    this.checkTaskExists(name);
 
     this.#tasks[name].handler.stop();
 
     this.notify(this);
 
-    return this;
+    return this.chain(name);
   }
 
   stopAll() {
@@ -165,14 +155,10 @@ class Kronash {
       .forEach((task) => task.handler.stop());
 
     this.notify(this);
-
-    return this;
   }
 
   clear(name: string) {
-    if (!this.checkTaskExists(name)) {
-      return this;
-    }
+    this.checkTaskExists(name);
 
     this.#tasks[name].handler.clear();
 
@@ -180,7 +166,7 @@ class Kronash {
 
     this.notify(this);
 
-    return this;
+    return this.chain(name);
   }
 
   clearAll() {
@@ -189,8 +175,6 @@ class Kronash {
     this.#tasks = {};
 
     this.notify(this);
-
-    return this;
   }
 
   getAll() {
@@ -198,17 +182,13 @@ class Kronash {
   }
 
   getTask(name: string) {
-    if (!this.checkTaskExists(name)) {
-      return this;
-    }
+    this.checkTaskExists(name);
 
     return this.#tasks[name];
   }
 
   getRemainingTime(name: string) {
-    if (!this.checkTaskExists(name)) {
-      throw new Error('Task not found');
-    }
+    this.checkTaskExists(name);
 
     return this.#tasks[name].remainingTime;
   }
@@ -221,6 +201,40 @@ class Kronash {
     }
 
     return hasExists;
+  }
+
+  private chain(name: string): KronashChain {
+    return {
+      start: () => this.start(name),
+      pause: () => this.pause(name),
+      resume: () => this.resume(name),
+      stop: () => this.stop(name),
+      clear: () => this.clear(name),
+      getRemainingTime: () => this.getRemainingTime(name),
+      getTask: () => this.getTask(name),
+      wait: this.wait,
+    };
+  }
+
+  toPlainObject(): KronashPlain {
+    return {
+      tasks: this.tasks,
+      clear: (...args) => this.clear(...args),
+      clearAll: (...args) => this.clearAll(...args),
+      create: (...args) => this.create(...args),
+      getAll: (...args) => this.getAll(...args),
+      pause: (...args) => this.pause(...args),
+      pauseAll: (...args) => this.pauseAll(...args),
+      resume: (...args) => this.resume(...args),
+      resumeAll: (...args) => this.resumeAll(...args),
+      start: (...args) => this.start(...args),
+      startAll: (...args) => this.startAll(...args),
+      stop: (...args) => this.stop(...args),
+      stopAll: (...args) => this.stopAll(...args),
+      wait: (...args) => this.wait(...args),
+      getRemainingTime: (...args) => this.getRemainingTime(...args),
+      getTask: (...args) => this.getTask(...args),
+    };
   }
 }
 
