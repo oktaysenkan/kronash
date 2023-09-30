@@ -1,4 +1,4 @@
-import { HandlerTask, TaskHandler } from '../types';
+import { HandlerTask, Task, TaskHandler } from '../types';
 
 class DefaultTaskHandler implements TaskHandler {
   private task: HandlerTask;
@@ -22,12 +22,20 @@ class DefaultTaskHandler implements TaskHandler {
     this.task = Object.assign(this.task, {
       timerId,
       startedAt,
+      firstStartedAt: startedAt,
       status: 'running',
     });
   }
 
   private reexecute() {
-    if (this.task.status !== 'finished') {
+    const isFinished = this.task.status === 'finished';
+
+    const isSingleExecution =
+      !this.task.repeatCount || this.task.repeatCount === 1;
+
+    const isRunning = this.task.timesExecuted > (this.task.repeatCount || 0);
+
+    if (!isFinished && !isSingleExecution && isRunning) {
       throw new Error('Task is not finished');
     }
 
@@ -144,15 +152,14 @@ class DefaultTaskHandler implements TaskHandler {
     clearTimeout(this.task.timerId);
 
     this.task = Object.assign(this.task, {
-      status: 'finished',
-      timerId: null,
-      stoppedAt: new Date().getTime(),
+      finishedAt: new Date().getTime(),
       remainingTime: 0,
       timesExecuted: this.task.timesExecuted + 1,
+      timerId: null,
     });
 
     if (this.task.onTick) {
-      await this.task.onTick();
+      await this.task.onTick(this.task as Task);
     }
 
     if (
@@ -169,7 +176,11 @@ class DefaultTaskHandler implements TaskHandler {
       !isSingleExecution && this.task.repeatCount === this.task.timesExecuted;
 
     if (isSingleExecution || isLastExecution) {
-      await this.task.onEnd?.();
+      this.task = Object.assign(this.task, {
+        status: 'finished',
+      });
+
+      await this.task.onEnd?.(this.task as Task);
     }
   }
 }

@@ -30,8 +30,12 @@ const Router = () => {
     kronash.create({
       name: newTaskId,
       duration: 5000,
-      onEnd() {
-        toast.success(`Task ${newTaskId} ended`);
+      onEnd(task) {
+        console.log(task);
+
+        const totalDuration = task.finishedAt! - task.firstStartedAt!;
+
+        toast.success(`Task ${newTaskId} ended after ${totalDuration}ms`);
       },
     });
   };
@@ -43,11 +47,17 @@ const Router = () => {
       name: newTaskId,
       duration: 2000,
       repeatCount: 5,
-      onTick() {
-        toast.success(`Task ${newTaskId} ticked`);
+      onTick(task) {
+        toast.success(`Task ${newTaskId} ticked ${task.timesExecuted} times`);
       },
-      onEnd() {
-        toast.success(`Task ${newTaskId} ended`);
+      onEnd(task) {
+        console.log(task);
+
+        const totalDuration = task.finishedAt! - task.firstStartedAt!;
+
+        toast.success(
+          `Task ${newTaskId} ended after ${totalDuration}ms (${task.timesExecuted} ticks)`
+        );
       },
     });
   };
@@ -135,7 +145,7 @@ const Router = () => {
   return (
     <div className="flex mx-auto flex-col gap-10 container py-10">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-        kronash Demo
+        kronash
       </h1>
 
       <div className="flex flex-col gap-4">

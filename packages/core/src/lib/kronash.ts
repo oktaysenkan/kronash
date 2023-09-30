@@ -3,13 +3,13 @@ import { CreateTaskOptions, KronashChain, KronashPlain, Task } from './types';
 
 class Kronash {
   #tasks: Record<string, Task> = {};
-  private observers = new Set<(kronash: Kronash) => void>();
+  private observers = new Set<(kronash: KronashPlain) => void>();
 
   constructor() {
     // TODO: Add options for throw error or return
   }
 
-  subscribe(observer: (kronash: Kronash) => void) {
+  subscribe(observer: (kronash: KronashPlain) => void) {
     this.observers.add(observer);
 
     return () => {
@@ -17,13 +17,13 @@ class Kronash {
     };
   }
 
-  unsubscribe(observer: (kronash: Kronash) => void) {
+  unsubscribe(observer: (kronash: KronashPlain) => void) {
     this.observers.delete(observer);
   }
 
   notify(kronash: Kronash) {
     this.observers.forEach((observer) => {
-      observer(kronash);
+      observer(kronash.toPlainObject());
     });
   }
 
@@ -43,13 +43,13 @@ class Kronash {
     }
 
     const onEndWrapper = () => {
-      options.onEnd?.();
+      options.onEnd?.(this.#tasks[options.name]);
 
       this.notify(this);
     };
 
     const onTickWrapper = () => {
-      options.onTick?.();
+      options.onTick?.(this.#tasks[options.name]);
 
       this.notify(this);
     };
@@ -59,9 +59,11 @@ class Kronash {
       timerId: null,
       status: 'idle',
       createdAt: new Date().getTime(),
+      firstStartedAt: null,
       startedAt: null,
       resumedAt: null,
       stoppedAt: null,
+      finishedAt: null,
       pausedAt: null,
       remainingTime: null,
       timesExecuted: 0,
@@ -177,10 +179,6 @@ class Kronash {
     this.notify(this);
   }
 
-  getAll() {
-    return { ...this.#tasks };
-  }
-
   getTask(name: string) {
     this.checkTaskExists(name);
 
@@ -222,7 +220,6 @@ class Kronash {
       clear: (...args) => this.clear(...args),
       clearAll: (...args) => this.clearAll(...args),
       create: (...args) => this.create(...args),
-      getAll: (...args) => this.getAll(...args),
       pause: (...args) => this.pause(...args),
       pauseAll: (...args) => this.pauseAll(...args),
       resume: (...args) => this.resume(...args),

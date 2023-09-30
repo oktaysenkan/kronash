@@ -4,16 +4,18 @@ export type Promiseable<T> = Promise<T> | T;
 
 export type Task = {
   name: string;
-  onTick?: () => Promiseable<void>;
-  onEnd?: () => Promiseable<void>;
+  onTick?: (task: Task) => Promiseable<void>;
+  onEnd?: (task: Task) => Promiseable<void>;
   duration: number;
   timerId: NodeJS.Timeout | null;
   status: 'running' | 'paused' | 'stopped' | 'idle' | 'finished';
   createdAt: number;
+  firstStartedAt: number | null;
   startedAt: number | null;
   resumedAt: number | null;
   stoppedAt: number | null;
   pausedAt: number | null;
+  finishedAt: number | null;
   remainingTime: number | null;
   handler: TaskHandler;
   repeatCount?: number;
@@ -44,7 +46,6 @@ export type KronashPlain = Pick<
   | 'create'
   | 'getRemainingTime'
   | 'getTask'
-  | 'getAll'
   | 'pause'
   | 'pauseAll'
   | 'resume'
