@@ -1,0 +1,35 @@
+# Getting Started
+
+Installing and using Kronash in your application is a pretty straightforward process. Follow the steps outlined below to introduce Kronash task management into your project.
+
+### Installation
+
+Install it to your project with the following command:
+
+```bash
+npm install --save @kronash/core
+```
+
+### Basic Usage
+
+Now you are ready to create, manage, and handle tasks. Below are examples of various operations you can perform with Kronash.
+
+```ts
+import Kronash from '@kronash/core';
+
+const kronash = new Kronash();
+
+const unsubscribe = kronash.subscribe((state) => {
+  console.log(state);
+});
+
+kronash.create({
+  name: 'uniqueName',
+  duration: 2000,
+  onEnd(task) {
+    console.log(`Task ${task.name} ended.`);
+  },
+});
+
+kronash.start('uniqueName');
+```

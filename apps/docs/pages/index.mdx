@@ -1,7 +1,26 @@
-# Kronash
+---
+title: Homepage
+---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel dolor dui. Quisque pulvinar enim risus, at suscipit dui tempor sit amet. Phasellus sodales tincidunt nisl quis elementum. Sed eu turpis ligula. Integer a pellentesque nisl. Sed blandit sit amet mi quis commodo. Integer vel convallis diam. Fusce a tempus sem.
+import React from 'react';
 
-## Quick Start
+export function Home() {
+  return (
+    <div className="max-w-[90rem] px-[max(env(safe-area-inset-right),1.5rem)] mx-auto py-14">
+      <h1 className="text-7xl font-bold">Rule the time</h1>
+      <h1 className="text-7xl font-bold">with Kronash</h1>
 
-Donec consectetur gravida tincidunt. Nam sit amet euismod purus. Aliquam sit amet libero eu eros lacinia vulputate eget eget mi. Phasellus finibus finibus aliquet. Morbi ex eros, placerat eu ligula et, ornare finibus lectus. Vestibulum scelerisque urna eu viverra sagittis.
+      <span className='block mt-10 text-xl opacity-70'>
+        Simple, powerful and flexible site generation framework <br />
+        with everything you love from Next.js
+      </span>
+
+      <div className='mt-20 h-48 bg-gray-400/10 flex items-center justify-center font-medium text-2xl'>
+        TODO
+      </div>
+    </div>
+    );
+
+}
+
+export default Home;

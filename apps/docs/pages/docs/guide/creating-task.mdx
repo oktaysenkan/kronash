@@ -1,0 +1,76 @@
+# Creating Task
+
+Once the task is started, it will execute after `duration` milliseconds have passed, and then repeat as many times as specified by `repeatCount`. When it runs, the `onTick` function will be triggered for each execution and the `onEnd` function will be triggered after all executions have been completed.
+
+This code creates a task with the following properties:
+
+- `name`: A unique identifier for the task. Here, it's 'myTask'.
+- `duration`: How long (in milliseconds) before the task should be executed. In this example, the task will execute every 5 seconds.
+- `repeatCount`: How many times the task should repeat. Here, the task will run 3 times in total.
+- `onTick`: A function to be executed whenever the task is executed (`tick`).
+- `onEnd`: A function to be executed when the task has completed all executions.
+
+Here's a step-by-step guide on how to create a task:
+
+### Single Execution
+
+In many instances, you might need to execute a task only once after a certain delay. This is known as single execution and it's very straightforward to set up with Kronash.
+
+```ts
+const task = kronash.create({
+  name: 'myTask',
+  duration: 5000,
+  onEnd(task) {
+    const totalDuration = task.finishedAt - task.firstStartedAt;
+    console.log(
+      `Task ${task.name} ended after ${totalDuration} milliseconds in total duration.`
+    );
+  },
+});
+
+task.start();
+```
+
+### Multiple Execution
+
+If you want Kronash to execute a task multiple times, that can be specified using the repeatCount property when you create a task. For instance, if you want a task to execute three times, you can do it like this:
+
+```ts
+const task = kronash.create({
+  name: 'multipleTask',
+  duration: 5000,
+  repeatCount: 3,
+  onTick(task) {
+    console.log(`Task ${task.name} ticked ${task.timesExecuted} times`);
+  },
+  onEnd(task) {
+    const totalDuration = task.finishedAt - task.firstStartedAt;
+    console.log(
+      `Task ${task.name} ended after ${totalDuration} milliseconds in total duration. Number of times executed: ${task.timesExecuted}`
+    );
+  },
+});
+
+task.start();
+```
+
+### Infinite Execution
+
+While it's important to be careful with setting tasks to run indefinitely in order to prevent unnecessary resource usage, sometimes you may need a task to be executed endlessly.
+
+```ts
+const task = kronash.create({
+  name: 'infiniteTask',
+  duration: 5000,
+  repeatCount: Infinity,
+  onTick(task) {
+    console.log(`Task ${task.name} ticked ${task.timesExecuted} times`);
+  },
+});
+
+task.start();
+```
+
+### Notes
+
+Remember, the provided `name` must be unique for each task. If a task with the same name exists, an `Error` will be thrown.

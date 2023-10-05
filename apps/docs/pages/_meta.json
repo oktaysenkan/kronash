@@ -1,4 +1,14 @@
 {
-  "index": "Introduction",
-  "guide": "Guide"
+  "index": {
+    "type": "page",
+    "title": "Kronash",
+    "display": "hidden",
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "docs": {
+    "type": "page",
+    "title": "Documentation"
+  }
 }

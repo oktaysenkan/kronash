@@ -1,17 +1,17 @@
 import { AppProps } from 'next/app';
-import Head from 'next/head';
 import './styles.css';
+import { KronashProvider } from '@kronash/react';
+import Kronash from '@kronash/core';
+import { Toaster } from 'sonner';
+
+const client = new Kronash();
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Head>
-        <title>Welcome to docs!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
-    </>
+    <KronashProvider client={client}>
+      <Component {...pageProps} />
+      <Toaster />
+    </KronashProvider>
   );
 }
 

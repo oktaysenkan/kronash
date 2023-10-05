@@ -1,0 +1,25 @@
+# Starting Task
+
+Starting a task in Kronash initiates the execution of the task based on its defined settings such as `duration` and `repeatCount`.
+
+To start a task that you've already created, use the `start` method from your Kronash instance and pass the name of the task as an argument:
+
+```ts
+kronash.start('myTask');
+// or
+kronash.create(options).start();
+```
+
+In this example, the task with the name `'myTask'` would begin execution.
+
+## Notes
+
+Before a task can be started, the following conditions must be met:
+
+1. The task must exist: You can't start a task that hasn't been created. Make sure to create the task with `kronash.create()` before attempting to start it.
+
+2. The task must be in the `idle` state: In Kronash, a task that has just been created but not yet started is in the `idle` state. If a task is in any other state (`running`, `paused`, `stopped`, `finished`), you cannot start it again.
+
+If these conditions aren't met when you call `kronash.start()`, an error will be thrown. Ensure these conditions are fulfilled to successfully start a task.
+
+Once started, the task will execute its first "tick" after the amount of time specified by `duration`. The tick will repeat as specified by `repeatCount` and if `repeatCount` is not defined, it will run indefinitely until manually stopped, cleared or paused.
