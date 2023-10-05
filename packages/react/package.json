@@ -1,6 +1,6 @@
 {
   "name": "@kronash/react",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.3",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "private": false,
