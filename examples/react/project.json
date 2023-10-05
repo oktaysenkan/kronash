@@ -1,7 +1,7 @@
 {
   "name": "react-demo",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/react-demo/src",
+  "sourceRoot": "examples/react-demo/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,8 +9,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/react-demo",
-        "postcssConfig": "apps/react-demo/postcss.config.js"
+        "outputPath": "dist/examples/react-demo",
+        "postcssConfig": "examples/react-demo/postcss.config.js"
       },
       "configurations": {
         "development": {
