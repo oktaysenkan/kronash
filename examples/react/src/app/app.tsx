@@ -149,14 +149,14 @@ const Router = () => {
       </h1>
 
       <div className="flex flex-col gap-4">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row flex-wrap gap-2">
           <Button onClick={handleCreateTask}>Create task</Button>
           <Button onClick={handleCreateTaskWithRepeatCount}>
             Create task with repeat count
           </Button>
         </div>
 
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row flex-wrap gap-2">
           <Button onClick={handleStartAllTasks}>Start all tasks</Button>
           <Button onClick={handlePauseAllTasks}>Pause all tasks</Button>
           <Button onClick={handleResumeAllTasks}>Resume all tasks</Button>
