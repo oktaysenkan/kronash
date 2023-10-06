@@ -104,12 +104,12 @@ const ReactExample = () => {
           {kronash.tasks.map((task) => (
             <div key={task.name} className="flex flex-col gap-2">
               <div className="flex gap-2 items-center">
-                <div className="relative flex rounded border border-gray-300 p-4 gap-2">
-                  <span className="block bg-gray-900 absolute -top-2 left-2 text-white text-xs px-2">
+                <div className="relative flex rounded border border-gray-500 p-4 gap-2 flex-wrap">
+                  <span className="block nx-bg-white dark:nx-bg-dark absolute -top-2 left-2 text-xs px-2">
                     {task.name}
                   </span>
 
-                  <span className="block bg-gray-900 absolute -top-2 right-2 text-white text-xs px-2">
+                  <span className="block nx-bg-white dark:nx-bg-dark absolute -top-2 right-2 text-xs px-2">
                     {task.status}
                   </span>
 
