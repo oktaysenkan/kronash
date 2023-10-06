@@ -7,11 +7,23 @@ import Warning from '../../../components/Warning/Warning';
 
 ### Code
 
+```tsx filename="App.tsx"
+import { KronashProvider } from '@kronash/react';
+import Kronash from '@kronash/core';
+
+const kronash = new Kronash();
+
+function App() {
+  return <KronashProvider client={kronash}>{/* Your app */}</KronashProvider>;
+}
+
+export default App;
+```
+
 ```tsx
 import React from 'react';
 import { useKronash } from '@kronash/react';
 import { nanoid } from 'nanoid';
-import { toast } from 'sonner';
 
 import Button from '../Button/Button';
 
@@ -25,7 +37,7 @@ const ReactExample = () => {
       name: id,
       duration: 1000,
       onEnd: (task) => {
-        toast.success(`Task ${task.name} ended`);
+        console.log(`Task ${task.name} ended`);
       },
     });
   };
@@ -38,10 +50,10 @@ const ReactExample = () => {
       duration: 1000,
       repeatCount: 5,
       onTick(task) {
-        toast.success(`Task ${task.name} ticked ${task.timesExecuted} times`);
+        console.log(`Task ${task.name} ticked ${task.timesExecuted} times`);
       },
       onEnd: (task) => {
-        toast.success(
+        console.log(
           `Task ${task.name} ended, ticked ${task.timesExecuted} times`
         );
       },
@@ -56,7 +68,7 @@ const ReactExample = () => {
       duration: 1000,
       repeatCount: Infinity,
       onTick: (task) => {
-        toast.success(`Task ${task.name} ticked ${task.timesExecuted} times`);
+        console.log(`Task ${task.name} ticked ${task.timesExecuted} times`);
       },
     });
   };
@@ -65,7 +77,7 @@ const ReactExample = () => {
     try {
       kronash.start(name);
     } catch (error) {
-      toast.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
@@ -73,7 +85,7 @@ const ReactExample = () => {
     try {
       kronash.pause(name);
     } catch (error) {
-      toast.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
@@ -81,7 +93,7 @@ const ReactExample = () => {
     try {
       kronash.resume(name);
     } catch (error) {
-      toast.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
@@ -89,7 +101,7 @@ const ReactExample = () => {
     try {
       kronash.stop(name);
     } catch (error) {
-      toast.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
@@ -97,7 +109,7 @@ const ReactExample = () => {
     try {
       kronash.clear(name);
     } catch (error) {
-      toast.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
