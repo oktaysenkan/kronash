@@ -1,6 +1,7 @@
 {
   "name": "@kronash/core",
   "version": "0.0.3",
+  "license": "MIT",
   "dependencies": {
     "tslib": "^2.3.0"
   },
