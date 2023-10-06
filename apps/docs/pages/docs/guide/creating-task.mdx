@@ -18,7 +18,7 @@ In many instances, you might need to execute a task only once after a certain de
 
 ```ts
 const task = kronash.create({
-  name: 'myTask',
+  name: 'singleTask',
   duration: 5000,
   onEnd(task) {
     const totalDuration = task.finishedAt - task.firstStartedAt;

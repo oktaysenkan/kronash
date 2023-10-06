@@ -21,10 +21,6 @@ import Kronash from '@kronash/core';
 
 const kronash = new Kronash();
 
-const unsubscribe = kronash.subscribe((state) => {
-  console.log(state);
-});
-
 kronash.create({
   name: 'uniqueName',
   duration: 2000,
