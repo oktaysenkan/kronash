@@ -1,7 +1,4 @@
 {
   "create": "create",
-  "---": {
-    "type": "separator"
-  },
   "task": "Task"
 }
