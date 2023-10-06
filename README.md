@@ -14,8 +14,6 @@
   <img alt="NPM" src="https://img.shields.io/badge/license-MIT-black">
 </div>
 
-<br />
-
 ## Motivation
 
 Born out of the need to simplify and enhance the management of `setTimeout` and `setInterval`, Kronash provides a high-level API to handle scheduling tasks with a wide array of options and control mechanisms. It takes away the verbosity of dealing with JavaScript's default timer functions, making your code cleaner and more intuitive.
