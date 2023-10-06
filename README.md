@@ -16,6 +16,8 @@
 
 <br />
 
+## Motivation
+
 Born out of the need to simplify and enhance the management of `setTimeout` and `setInterval`, Kronash provides a high-level API to handle scheduling tasks with a wide array of options and control mechanisms. It takes away the verbosity of dealing with JavaScript's default timer functions, making your code cleaner and more intuitive.
 
 Whether you need to create tasks that repeat at specified intervals, or simply delay certain operations, Kronash has got you covered. It even allows you to pause, resume, stop, and clear tasks whenever required, providing a level of control that's often difficult to handle manually.
