@@ -1,6 +1,10 @@
-![poster](https://github.com/ipfs/ipfs-webui/assets/42527467/976b103f-8a4e-479a-963c-c6e946a91659)
+<a href="https://kronash-docs.vercel.app" target="_blank" rel="noopener">
+  <picture>
+    <img alt="banner" src="https://github.com/oktaysenkan/kronash/assets/42527467/64cbbf00-d930-4688-9e0c-c954b23f5dac" />
+  </picture>
+</a>
 
- <h1 align="center">Kronash</h1>
+<h1 align="center">Kronash</h1>
 
 <h3 align="center">Manage timed tasks effortlessly</h3>
 
