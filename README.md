@@ -1,6 +1,15 @@
-# Kronash
+![poster](https://github.com/ipfs/ipfs-webui/assets/42527467/976b103f-8a4e-479a-963c-c6e946a91659)
 
-Kronash is a powerful, flexible and easy-to-use task management library for JavaScript applications.
+ <h1 align="center">Kronash</h1>
+
+<h3 align="center">Manage timed tasks effortlessly</h3>
+
+<div align="center">
+  <p>Kronash is a powerful, flexible and easy-to-use task management library for JavaScript applications.</p>
+  <img alt="NPM" src="https://img.shields.io/badge/license-MIT-black">
+</div>
+
+<br />
 
 Born out of the need to simplify and enhance the management of `setTimeout` and `setInterval`, Kronash provides a high-level API to handle scheduling tasks with a wide array of options and control mechanisms. It takes away the verbosity of dealing with JavaScript's default timer functions, making your code cleaner and more intuitive.
 
