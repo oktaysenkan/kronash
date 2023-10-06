@@ -1,6 +1,6 @@
 <a href="https://kronash-docs.vercel.app" target="_blank" rel="noopener">
   <picture>
-    <img alt="banner" src="https://github.com/oktaysenkan/kronash/assets/42527467/64cbbf00-d930-4688-9e0c-c954b23f5dac" />
+    <img alt="banner" src="https://github.com/oktaysenkan/kronash/assets/42527467/284439a3-8428-46d3-9168-095c8137e6f8" />
   </picture>
 </a>
 
