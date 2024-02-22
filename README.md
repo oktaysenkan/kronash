@@ -1,81 +1,37 @@
-# Turborepo starter
+<a href="https://kronash-docs.vercel.app" target="_blank" rel="noopener">
+  <picture>
+    <source srcset="https://github.com/oktaysenkan/kronash/assets/42527467/7e237fb0-9566-4ca6-91d4-0b5dbabbf0aa" />
+    <img alt="banner" src="https://github.com/oktaysenkan/kronash/assets/42527467/7e237fb0-9566-4ca6-91d4-0b5dbabbf0aa" />
+  </picture>
+</a>
 
-This is an official starter Turborepo.
+<h1 align="center">Kronash</h1>
 
-## Using this example
+<h3 align="center">Manage timed tasks effortlessly</h3>
 
-Run the following command:
+<div align="center">
+  <p>Kronash is a powerful, flexible and easy-to-use task management library for JavaScript applications.</p>
+  <img alt="NPM" src="https://img.shields.io/badge/license-MIT-black">
+</div>
 
-```sh
-npx create-turbo@latest
-```
+## Motivation
 
-## What's inside?
+Born out of the need to simplify and enhance the management of `setTimeout` and `setInterval`, Kronash provides a high-level API to handle scheduling tasks with a wide array of options and control mechanisms. It takes away the verbosity of dealing with JavaScript's default timer functions, making your code cleaner and more intuitive.
 
-This Turborepo includes the following packages/apps:
+Whether you need to create tasks that repeat at specified intervals, or simply delay certain operations, Kronash has got you covered. It even allows you to pause, resume, stop, and clear tasks whenever required, providing a level of control that's often difficult to handle manually.
 
-### Apps and Packages
+Kronash empowers you to write more understandable and maintainable code when dealing with async operations, timers or delays.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Features
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- 🌍 Framework Agnostic: Works seamlessly with any JavaScript framework or library, or in a plain JavaScript environment. It's fully compatible with popular libraries like React, Vue, and Angular.
+- 🚀 Easy Task Creation: Quickly set up tasks with desired settings.
+- 🕹️ Full Task Control: Start, pause, resume, stop, or remove tasks as needed.
+- 👀 Observer Pattern Support: Get updates on task state changes by subscribing to events.
+- 🔗 Chainable API: Enables concise and logical code structure.
+- 💅 TypeScript Support: Fully compatible with TypeScript for robust typing support.
 
-### Utilities
+## Resources
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- **[Documentation](https://kronash-docs.vercel.app/)**
+- **[React Demo](https://kronash-react-demo.vercel.app/)**

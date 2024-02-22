@@ -1,0 +1,8 @@
+{
+  "extends": "@kronash/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["src", "turbo", "tsup.config.ts", "jest.config.js"],
+  "exclude": ["node_modules", "dist"]
+}
