@@ -1,0 +1,3 @@
+{
+  "extends": "@kronash/typescript-config/base.json"
+}

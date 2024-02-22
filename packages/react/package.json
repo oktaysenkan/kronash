@@ -1,12 +1,33 @@
 {
   "name": "@kronash/react",
-  "version": "0.0.3",
-  "license": "MIT",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "private": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@kronash/eslint-config": "*",
+    "@kronash/typescript-config": "*",
+    "@turbo/gen": "^1.11.3",
+    "@types/eslint": "^8.56.1",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "eslint": "^8.56.0",
+    "react": "^18.2.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@kronash/core": "*",
+    "react": "^16.8 || ^17 || ^18",
+    "react-dom": "^16.8 || ^17 || ^18"
   }
 }

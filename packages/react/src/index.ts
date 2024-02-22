@@ -1,2 +1,2 @@
-export * from './lib/KronashProvider';
-export * from './lib/useKronash';
+export * from "./KronashProvider";
+export * from "./useKronash";
