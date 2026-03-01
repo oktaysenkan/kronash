@@ -1,4 +1,4 @@
-import { HandlerTask, Task, TaskHandler } from '../types';
+import { HandlerTask, Task, TaskHandler } from "../types";
 
 class DefaultTaskHandler implements TaskHandler {
   private task: HandlerTask;
@@ -8,8 +8,8 @@ class DefaultTaskHandler implements TaskHandler {
   }
 
   start() {
-    if (this.task.status !== 'idle') {
-      throw new Error('Task is not idle');
+    if (this.task.status !== "idle") {
+      throw new Error("Task is not idle");
     }
 
     const startedAt = new Date().getTime();
@@ -23,12 +23,12 @@ class DefaultTaskHandler implements TaskHandler {
       timerId,
       startedAt,
       firstStartedAt: startedAt,
-      status: 'running',
+      status: "running",
     });
   }
 
   private reexecute() {
-    const isFinished = this.task.status === 'finished';
+    const isFinished = this.task.status === "finished";
 
     const isSingleExecution =
       !this.task.repeatCount || this.task.repeatCount === 1;
@@ -36,7 +36,7 @@ class DefaultTaskHandler implements TaskHandler {
     const isRunning = this.task.timesExecuted > (this.task.repeatCount || 0);
 
     if (!isFinished && !isSingleExecution && isRunning) {
-      throw new Error('Task is not finished');
+      throw new Error("Task is not finished");
     }
 
     const startedAt = new Date().getTime();
@@ -53,21 +53,17 @@ class DefaultTaskHandler implements TaskHandler {
       remainingTime: null,
       pausedAt: null,
       stoppedAt: null,
-      status: 'running',
+      status: "running",
     });
   }
 
   pause() {
-    if (this.task.status !== 'running') {
-      throw new Error('Task is not running');
-    }
-
-    if (!this.task.timerId) {
-      throw new Error('timerId not found');
+    if (this.task.status !== "running") {
+      throw new Error("Task is not running");
     }
 
     if (!this.task.startedAt) {
-      throw new Error('startedAt not found');
+      throw new Error("startedAt not found");
     }
 
     clearTimeout(this.task.timerId);
@@ -85,7 +81,7 @@ class DefaultTaskHandler implements TaskHandler {
     const remainingTime = duration - (pausedAt - startedAt);
 
     this.task = Object.assign(this.task, {
-      status: 'paused',
+      status: "paused",
       timerId: null,
       pausedAt,
       remainingTime,
@@ -93,8 +89,8 @@ class DefaultTaskHandler implements TaskHandler {
   }
 
   resume() {
-    if (this.task.status !== 'paused') {
-      throw new Error('Task is not paused');
+    if (this.task.status !== "paused") {
+      throw new Error("Task is not paused");
     }
 
     const duration = this.task.remainingTime || 0;
@@ -104,19 +100,15 @@ class DefaultTaskHandler implements TaskHandler {
     const resumedAt = new Date().getTime();
 
     this.task = Object.assign(this.task, {
-      status: 'running',
+      status: "running",
       timerId,
       resumedAt,
     });
   }
 
   stop() {
-    if (this.task.status !== 'running') {
-      throw new Error('Task is not running');
-    }
-
-    if (!this.task.timerId) {
-      throw new Error('timerId not found');
+    if (this.task.status !== "running") {
+      throw new Error("Task is not running");
     }
 
     clearTimeout(this.task.timerId);
@@ -131,7 +123,7 @@ class DefaultTaskHandler implements TaskHandler {
 
     this.task = Object.assign(this.task, {
       ...this.task,
-      status: 'stopped',
+      status: "stopped",
       timerId: null,
       stoppedAt,
       remainingTime,
@@ -145,10 +137,6 @@ class DefaultTaskHandler implements TaskHandler {
   }
 
   async onTaskEnd(_: HandlerTask) {
-    if (!this.task.timerId) {
-      throw new Error('timerId not found');
-    }
-
     clearTimeout(this.task.timerId);
 
     this.task = Object.assign(this.task, {
@@ -177,7 +165,7 @@ class DefaultTaskHandler implements TaskHandler {
 
     if (isSingleExecution || isLastExecution) {
       this.task = Object.assign(this.task, {
-        status: 'finished',
+        status: "finished",
       });
 
       await this.task.onEnd?.(this.task as Task);
